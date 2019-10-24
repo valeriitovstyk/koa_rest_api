@@ -1,6 +1,7 @@
 const Router = require('koa-router');
 const UserController = require('../controllers/UserController');
 const koaBody = require('koa-body');
+const models = require('../models/index')
 
 const router = new Router();
 router

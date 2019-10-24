@@ -13,6 +13,10 @@ const Author = sequelize.define('author', {
     }
 }, {
     // options
+    createdAt   : 'createdAt',
+    updatedAt   : 'updatedAt',
+    timestamps: false,
+    underscored : true,
 });
 
 module.exports = Author;
