@@ -1,14 +1,13 @@
 const Router = require('koa-router');
-const { UserController } = require('../controllers/UserController')
+const UserController = require('../controllers/UserController');
+const koaBody = require('koa-body');
 
 const router = new Router();
 router
-    .get('/',  async ctx => {ctx.body = 'authors list'})
-    // .get('/test', UserController.getById)
-    .get('/:id',  async ctx => {ctx.body = 'get author by id'})
-    .post('/',  async ctx => {ctx.body = 'add author'})
-    .put('/:id',  async ctx => {ctx.body = 'edit author'})
-    .delete('/:id',  async ctx => {ctx.body = 'delete author'})
-
+    .get('/', UserController.getAuthorList)
+    .get('/:id', UserController.getAuthor)
+    .post('/', koaBody(), UserController.addAuthor)
+    .put('/:id', koaBody(), UserController.updateAuthor)
+    .delete('/:id', UserController.removeAuthor);
 
 module.exports = router.routes();
