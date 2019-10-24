@@ -1,29 +1,29 @@
-const Author = require('../models/author');
+const Post = require('../models/post');
 // TODO: addAuthor and UpdateAuthor should return new or modified Author
 // TODO: updateAuthor - handle if from FE receives only updated fields
 // TODO: addAuthor and updateAuthor could have search by name method
 // TODO: general error handling
 
-const UserController = {
-    getAuthorList: async (ctx) => {
+const PostController = {
+    getPostList: async (ctx) => {
         try {
-            ctx.body = await Author.findAll()
+            ctx.body = await Post.findAll()
         } catch (err) {
             console.log(err);
             ctx.status = 204;
         }
     },
-    getAuthor: async (ctx) => {
+    getPost: async (ctx) => {
         try {
-            ctx.body = await Author.findOne({where: {id: ctx.params.id}});
+            ctx.body = await Post.findOne({where: {id: ctx.params.id}});
         } catch (err) {
             console.log(err);
             ctx.status = 204;
         }
     },
-    addAuthor: async (ctx, next) => {
+    addPost: async (ctx, next) => {
         try {
-            const newAuthor = await Author.create ({
+            const newAuthor = await Post.create ({
                 name: ctx.request.body.name,
                 email: ctx.request.body.email,
                 password: ctx.request.body.password
@@ -34,17 +34,17 @@ const UserController = {
         }
 
     },
-    removeAuthor: async (ctx) => {
+    removePost: async (ctx) => {
         try {
-            ctx.body = await Author.destroy({where: {id: ctx.params.id}});
+            ctx.body = await Post.destroy({where: {id: ctx.params.id}});
         } catch (err) {
             console.log(err);
             ctx.status = 204;
         }
     },
-    updateAuthor: async (ctx, next) => {
+    updatePost: async (ctx, next) => {
         try{
-            const updateAuthor = await Author.update ({
+            const updateAuthor = await Post.update ({
                 name: ctx.request.body.name,
                 email: ctx.request.body.email,
                 password: ctx.request.body.password
@@ -61,4 +61,4 @@ const UserController = {
     },
 };
 
-module.exports = UserController;
+module.exports = PostController;
