@@ -4,10 +4,14 @@ const Author = require('../models/author');
 // TODO: addAuthor and updateAuthor could have search by name method
 // TODO: general error handling
 
-const UserController = {
+const AuthorController = {
     getAuthorList: async (ctx) => {
         try {
-            ctx.body = await Author.findAll()
+            ctx.body = await Author.findAndCountAll({
+                order: [['id', 'ASC']],
+                limit: ctx.request.query.pageLimit,
+                offset: ctx.request.query.offsetPosition,
+            })
         } catch (err) {
             console.log(err);
             ctx.status = 204;
@@ -61,4 +65,4 @@ const UserController = {
     },
 };
 
-module.exports = UserController;
+module.exports = AuthorController;

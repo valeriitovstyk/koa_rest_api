@@ -5,7 +5,11 @@ const models = require('../models/index');
 const PostController = {
     getPostList: async (ctx) => {
         try {
-            ctx.body = await Post.findAll()
+            ctx.body = await Post.findAndCountAll({
+                order: [['id', 'ASC']],
+                limit: ctx.request.query.pageLimit,
+                offset: ctx.request.query.offsetPosition,
+            })
         } catch (err) {
             console.log(err);
             ctx.status = 204;
@@ -21,7 +25,10 @@ const PostController = {
     },
     getPostListByAuthorId:  async (ctx) => {
         try {
-            ctx.body = await models.Author.findAll({
+            ctx.body = await models.Author.findAndCountAll({
+                order: [['id', 'ASC']],
+                limit: ctx.request.query.pageLimit,
+                offset: ctx.request.query.offsetPosition,
                 include: [ models.Post ],
                 where: {
                     id: ctx.params.id,

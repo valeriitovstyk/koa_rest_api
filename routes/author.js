@@ -1,5 +1,5 @@
 const Router = require('koa-router');
-const UserController = require('../controllers/UserController');
+const UserController = require('../controllers/AuthorController');
 const koaBody = require('koa-body');
 const models = require('../models/index');
 const jwt = require('../middleware/jwt');
