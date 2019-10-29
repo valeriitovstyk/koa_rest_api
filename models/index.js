@@ -4,10 +4,10 @@ const models = {
         Post: require('./post'),
 };
 
-models.Post.hasMany(models.Comment);
 models.Comment.belongsTo(models.Post);
 models.Comment.belongsTo(models.Author);
 models.Post.belongsTo(models.Author);
+models.Post.hasMany(models.Comment);
 models.Author.hasMany(models.Comment);
 models.Author.hasMany(models.Post);
 
