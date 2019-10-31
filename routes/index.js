@@ -7,7 +7,6 @@ const loginRouter = require('./login');
 
 const mainRouter = new Router();
 
-// mainRouter.post('/login', authenticate);
 mainRouter.use('/posts', postRouter);
 mainRouter.use('/authors', authorRouter);
 mainRouter.use('/comments', commentRouter);

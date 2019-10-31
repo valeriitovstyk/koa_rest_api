@@ -34,22 +34,6 @@ const LoginController = {
             ctx.status = 204;
         }
     },
-    getCredentials: async (ctx) => {
-        try {
-            const credentials = await Author.findOne({
-                    attributes: ['name', 'password'],
-                    where: {name: ctx.request.body.name}
-                },
-            );
-            const encrypted_pass = await encrypt(credentials.name);
-            console.log(encrypted_pass)
-
-            credentials ? ctx.body = credentials : ctx.body = "no data";
-        } catch (err) {
-            console.log(err);
-            ctx.status = 204;
-        }
-    },
 };
 
 module.exports = LoginController;
