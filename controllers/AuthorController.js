@@ -1,4 +1,6 @@
 const Author = require('../models/author');
+const encrypt = require('../helpers/crypto');
+
 // TODO: addAuthor and UpdateAuthor should return new or modified Author
 // TODO: updateAuthor - handle if from FE receives only updated fields
 // TODO: addAuthor and updateAuthor could have search by name method
@@ -30,7 +32,7 @@ const AuthorController = {
             const newAuthor = await Author.create ({
                 name: ctx.request.body.name,
                 email: ctx.request.body.email,
-                password: ctx.request.body.password
+                password: await encrypt(ctx.request.body.password)
             })
         } catch (err) {
             console.log(err);
@@ -51,7 +53,7 @@ const AuthorController = {
             const updateAuthor = await Author.update ({
                 name: ctx.request.body.name,
                 email: ctx.request.body.email,
-                password: ctx.request.body.password
+                password: await encrypt(ctx.request.body.password)
             }, {
                 where: {
                     id: ctx.params.id
@@ -61,7 +63,6 @@ const AuthorController = {
             console.log(err);
             ctx.status = 204;
         }
-
     },
 };
 
