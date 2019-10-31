@@ -13,4 +13,3 @@ mainRouter.use('/comments', commentRouter);
 mainRouter.use('/login', loginRouter);
 
 module.exports = mainRouter.routes();
-

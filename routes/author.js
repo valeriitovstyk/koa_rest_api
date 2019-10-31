@@ -1,14 +1,14 @@
 const Router = require('koa-router');
-const UserController = require('../controllers/AuthorController');
+const AuthorController = require('../controllers/AuthorController');
 const koaBody = require('koa-body');
 const checkToken = require('../middleware/authenticate');
 
 const router = new Router();
 router
-    .get('/', UserController.getAuthorList)
-    .get('/:id', UserController.getAuthor)
-    .post('/', checkToken, koaBody(), UserController.addAuthor)
-    .put('/:id', checkToken, koaBody(), UserController.updateAuthor)
-    .delete('/:id', checkToken, UserController.removeAuthor);
+    .get('/', AuthorController.getAuthorList)
+    .get('/:id', AuthorController.getAuthor)
+    .post('/', koaBody(), AuthorController.addAuthor)
+    .put('/:id', checkToken, koaBody(), AuthorController.updateAuthor)
+    .delete('/:id', checkToken, AuthorController.removeAuthor);
 
 module.exports = router.routes();
