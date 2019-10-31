@@ -1,0 +1,1 @@
+module.exports = secret = "this_is_secret";
