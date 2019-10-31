@@ -33,6 +33,7 @@ const CommentController = {
             ctx.status = 204;
         }
     },
+// TODO : figure out how to pass offset and limit directly into options
     getCommentsByAuthor:  async (ctx) => {
         try {
             ctx.body = await models.Author.findAndCountAll({

@@ -61,7 +61,7 @@ const PostController = {
             const newPost = await Post.create ({
                 title: ctx.request.body.title,
                 content: ctx.request.body.content,
-                userId: ctx.request.body.user_id
+                authorId: ctx.request.body.author_id
             })
         } catch (err) {
             console.log(err);

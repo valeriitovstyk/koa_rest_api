@@ -1,5 +1,5 @@
 const Author = require('../models/author');
-const encrypt = require('../helpers/crypto');
+const bcrypt = require('bcrypt');
 
 // TODO: addAuthor and UpdateAuthor should return new or modified Author
 // TODO: updateAuthor - handle if from FE receives only updated fields
@@ -32,7 +32,7 @@ const AuthorController = {
             const newAuthor = await Author.create ({
                 name: ctx.request.body.name,
                 email: ctx.request.body.email,
-                password: await encrypt(ctx.request.body.password)
+                password: await bcrypt.hash(ctx.request.body.password, 5)
             })
         } catch (err) {
             console.log(err);
@@ -48,12 +48,13 @@ const AuthorController = {
             ctx.status = 204;
         }
     },
+// TODO:  use helpers/encrypt instea bcrypt for add and update
     updateAuthor: async (ctx, next) => {
         try{
             const updateAuthor = await Author.update ({
                 name: ctx.request.body.name,
                 email: ctx.request.body.email,
-                password: await encrypt(ctx.request.body.password)
+                password: await bcrypt.hash(ctx.request.body.password, 5)
             }, {
                 where: {
                     id: ctx.params.id

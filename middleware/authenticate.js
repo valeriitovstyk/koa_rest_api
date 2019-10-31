@@ -4,18 +4,14 @@ const secret = require('../config/jwt');
 
 module.exports = async (ctx, next) => {
     if (!ctx.request.headers['x-access-token']) ctx.throw(403, 'No token.');
-
     const token = ctx.request.headers['x-access-token'];
-    console.log("token is " + token);
-
+    // console.log("token is " + token);
     try {
         const decoded = jwt.verify(token, secret);
-        console.log(decoded)
-
+        // console.log(decoded)
     } catch (err) {
         ctx.throw(err.status || 403, err.text);
     }
-
     await next();
 };
 

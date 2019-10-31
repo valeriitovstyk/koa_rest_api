@@ -7,7 +7,7 @@ const router = new Router();
 router
     .get('/', AuthorController.getAuthorList)
     .get('/:id', AuthorController.getAuthor)
-    .post('/', checkToken, koaBody(), AuthorController.addAuthor)
+    .post('/', koaBody(), AuthorController.addAuthor)
     .put('/:id', checkToken, koaBody(), AuthorController.updateAuthor)
     .delete('/:id', checkToken, AuthorController.removeAuthor);
 
